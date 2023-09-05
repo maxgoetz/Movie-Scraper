@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import schedule
-import time
+from apscheduler.schedulers.blocking import BlockingScheduler
 import requests
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -81,10 +80,8 @@ def find_details(href, rating):
         update_sheet(href, rating, title, description_list, summary)
     except:
         return  
-    
 
-schedule.every().tuesday.at("06:00").do(find_movies)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1800)
+schedule = BlockingScheduler()
+schedule.add_job(find_movies, 'cron', day_of_week='sun', hour=18)
+schedule.start()
