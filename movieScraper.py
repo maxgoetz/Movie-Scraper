@@ -11,9 +11,9 @@ scopes = [
 'https://www.googleapis.com/auth/drive'
 ]
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name("C:\\Users\\13366\\Downloads\\Summer Projects\\secret_key_for_movies.json", scopes)
+credentials = ServiceAccountCredentials.from_json_keyfile_name("key_path", scopes)
 file = gspread.authorize(credentials)
-workbook = file.open("Eye Candy")
+workbook = file.open("spreadsheet")
 sheet = workbook.sheet1
 
 
